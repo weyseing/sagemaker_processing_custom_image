@@ -1,0 +1,9 @@
+services:
+  sagemaker_gpu:
+    build: .
+    container_name: sagemaker_gpu
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+      

@@ -1,1 +1,34 @@
-# sagemaker_gpu_processing
+# Setup
+-  **Copy `.env.example` to `.env` & fill up value**
+```bash
+AWS_ACCESS_KEY_ID= # AWS access key
+AWS_SECRET_ACCESS_KEY= # AWS secret key
+SAGEMAKER_ROLE= # AWS IAM role
+```
+
+# Create IAM User
+- **Create IAM user**
+
+![image](./assets/3.PNG)
+
+- **Add IAM permission**
+    - `AmazonSageMakerFullAccess`
+    - `AmazonS3FullAccess`
+
+# Create IAM Role
+
+- **Create IAM role**
+
+![image](./assets/1.PNG)
+![image](./assets/2.PNG)
+
+- **Add IAM permission**
+    - `AmazonSageMakerFullAccess`
+    - `AmazonS3FullAccess`
+
+
+
+
+
+
+
