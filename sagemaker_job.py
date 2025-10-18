@@ -11,9 +11,11 @@ role = os.getenv("SAGEMAKER_ROLE")
 bucket = sess.default_bucket()
 
 # S3 paths
-input_data_uri = f"s3://{bucket}/path/to/your/input/data/" 
-output_data_uri = f"s3://{bucket}/path/for/output/results/"
+output_data_uri = f"s3://{bucket}/sagemaker-gpu-processing/output/"
 script_uri = "process_data.py"
+
+# instance
+GPU_INSTANCE_TYPE = 'ml.g4dn.xlarge'
 
 # image
 image_uri = sagemaker.image_uris.retrieve(
@@ -21,7 +23,7 @@ image_uri = sagemaker.image_uris.retrieve(
     region=region,
     version='2.0.1',  
     py_version='py310',
-    instance_type='ml.p3.2xlarge',
+    instance_type=GPU_INSTANCE_TYPE,
     image_scope='training'
 )
 
@@ -30,7 +32,7 @@ processor = ScriptProcessor(
     role=role,
     image_uri=image_uri,
     command=['python3'],
-    instance_type='ml.g4dn.xlarge', 
+    instance_type=GPU_INSTANCE_TYPE, 
     instance_count=1,
     sagemaker_session=sess
 )
@@ -38,13 +40,6 @@ processor = ScriptProcessor(
 # processing job
 processor.run(
     code=script_uri, 
-    inputs=[
-        ProcessingInput(
-            source=input_data_uri,
-            destination='/opt/ml/processing/input/data',
-            input_name='input_data'
-        )
-    ],
     outputs=[
         ProcessingOutput(
             source='/opt/ml/processing/output', 
