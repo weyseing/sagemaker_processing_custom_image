@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Setup
 -  **Copy `.env.example` to `.env` & fill up value**
 ```bash
@@ -34,7 +33,3 @@ SAGEMAKER_ROLE= # AWS IAM role
 
 # Custom Docker Image
 - **Create custom Dockerfile via `Dockerfile_sagemaker` file** 
-=======
-# sagemaker_processing_custom_image
-Sagemaker Job Processing with Custom Image
->>>>>>> 430289fcec9833d9904e85f6632886092b277125
