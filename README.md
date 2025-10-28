@@ -38,3 +38,29 @@ AWS_ECR_ENDPOINT= # ECR endpoint
 ```shell
 ./cli/deploy_ecr.sh
 ```
+
+# Run Sagemaker Job
+- **Send processing job**
+```bash
+python src/send_sagemaker_job.py
+```
+
+- **Check job name**
+
+![image](./assets/6.PNG)
+
+- **Check job logs**
+    - Search based on `job name`
+
+![image](./assets/7.PNG)
+![image](./assets/8.PNG)
+
+- **Check job CODE & INPUT files**
+    - Search based on `sagemaker-<AWS_REGION>-<AWS_ACCOUNT_ID>/<job_name>`
+
+![image](./assets/9.PNG)
+
+- **Check job OUTPUT files**
+    - Search based on `sagemaker-<AWS_REGION>-<AWS_ACCOUNT_ID>/<job_name>`
+
+![image](./assets/10.PNG)

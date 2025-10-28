@@ -1,3 +1,6 @@
 awscli==1.42.54
 sagemaker==2.253.1
 boto3==1.40.54
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0

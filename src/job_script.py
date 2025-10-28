@@ -1,19 +1,32 @@
+# src/job_script.py
+
 import os
 import torch
 import argparse
 
-# input/output path
-OUTPUT_DATA_PATH = "/opt/ml/processing/output/"
-
 if __name__ == '__main__':
     # args
     parser = argparse.ArgumentParser()
-    parser.add_argument('--arg1', type=str, default='default_value')
+    parser.add_argument('--input-path', type=str, required=True, help='Path to input directory')
+    parser.add_argument('--output-path', type=str, required=True, help='Path to output directory')
+    parser.add_argument('--input-filename', type=str, default='input_file.txt', help='Name of input file')
     args = parser.parse_args()
-    print(f"Arguments: {args}")
+    print(f"Input path: {args.input_path}")
+    print(f"Output path: {args.output_path}")
+    print(f"Input filename: {args.input_filename}")
+
+    # Read input file
+    input_file_path = os.path.join(args.input_path, args.input_filename)
+    print(f"Reading input file: {input_file_path}")
+    with open(input_file_path, 'r') as f:
+        file_content = f.read()
+    print(f"=== INPUT FILE CONTENT ===")
+    print(file_content)
+    print(f"=== END OF INPUT FILE ===")
 
     # check GPU
     if torch.cuda.is_available():
+        # GPU device info
         device = torch.device('cuda')
         gpu_index = torch.cuda.current_device()
         print(f"\n--- CUDA Status ---")
@@ -53,8 +66,14 @@ if __name__ == '__main__':
         print("CUDA not available. Using CPU.")
 
     # output result
-    os.makedirs(OUTPUT_DATA_PATH, exist_ok=True)
-    with open(os.path.join(OUTPUT_DATA_PATH, 'results.txt'), 'w') as f:
-        f.write(f"Processing complete")
-
-    print("Script finished successfully.")
+    os.makedirs(args.output_path, exist_ok=True)
+    output_file_path = os.path.join(args.output_path, 'results.txt')
+    with open(output_file_path, 'w') as f:
+        f.write(f"Processing complete\n")
+        f.write(f"Input file content:\n{file_content}\n")
+        f.write(f"GPU available: {torch.cuda.is_available()}\n")
+        f.write(f"Input path used: {args.input_path}\n")
+        f.write(f"Output path used: {args.output_path}\n")
+    print(f"Results written to: {output_file_path}")
+    
+print("Script finished successfully.")
