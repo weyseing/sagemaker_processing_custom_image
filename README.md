@@ -4,6 +4,7 @@
 AWS_ACCESS_KEY_ID= # AWS access key
 AWS_SECRET_ACCESS_KEY= # AWS secret key
 SAGEMAKER_ROLE= # AWS IAM role
+AWS_ECR_ENDPOINT= # ECR endpoint
 ```
 
 # Create IAM User
@@ -33,3 +34,7 @@ SAGEMAKER_ROLE= # AWS IAM role
 
 # Custom Docker Image
 - **Create custom Dockerfile via `Dockerfile_sagemaker` file** 
+- **Build & push to ECR**
+```shell
+./cli/deploy_ecr.sh
+```
